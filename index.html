@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Marry Me? 💍</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Page container */
+        .page {
+            display: none;
+            min-height: 100vh;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        .page.active {
+            display: flex;
+        }
+
+        /* Floating hearts background */
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 30px;
+            animation: float-heart 6s infinite ease-in-out;
+            opacity: 0;
+        }
+
+        @keyframes float-heart {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-10vh) rotate(360deg) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        /* ========== PAGE 1: Proposal ========== */
+        .proposal-container {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 60px 50px;
+            border-radius: 30px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 90%;
+            backdrop-filter: blur(10px);
+        }
+
+        .ring-icon {
+            font-size: 80px;
+            animation: ring-bounce 2s infinite;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        @keyframes ring-bounce {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-20px) rotate(-10deg);
+            }
+            75% {
+                transform: translateY(-10px) rotate(10deg);
+            }
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            color: #d946ef;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: #666;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .buttons-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            margin-top: 40px;
+            position: relative;
+            min-height: 80px;
+        }
+
+        .btn {
+            padding: 18px 40px;
+            font-size: 1.5rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        #yesBtn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            animation: pulse-yes 2s infinite;
+        }
+
+        @keyframes pulse-yes {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        #yesBtn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(245, 87, 108, 0.5);
+        }
+
+        #noBtn {
+            background: #e5e7eb;
+            color: #666;
+            position: absolute;
+            transition: all 0.2s ease;
+        }
+
+        /* ========== PAGE 2: Celebration ========== */
+        .celebration-container {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            color: white;
+            max-width: 800px;
+            width: 90%;
+        }
+
+        .celebration-container h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(3rem, 8vw, 6rem);
+            color: #fbbf24;
+            margin-bottom: 30px;
+            text-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
+            animation: celebration-pop 0.8s ease;
+        }
+
+        @keyframes celebration-pop {
+            0% {
+                transform: scale(0) rotate(-180deg);
+                opacity: 0;
+            }
+            60% {
+                transform: scale(1.2) rotate(10deg);
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        .celebration-container p {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .emoji-big {
+            font-size: clamp(60px, 10vw, 100px);
+            margin: 30px 0;
+            display: block;
+        }
+
+        .continue-btn {
+            margin-top: 40px;
+            padding: 20px 50px;
+            font-size: 1.5rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(251, 191, 36, 0.4);
+            transition: all 0.3s ease;
+            animation: bounce-btn 2s infinite;
+        }
+
+        @keyframes bounce-btn {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .continue-btn:hover {
+            transform: scale(1.05) translateY(-5px);
+            box-shadow: 0 15px 40px rgba(251, 191, 36, 0.6);
+        }
+
+        /* ========== PAGE 3: Feedback Form ========== */
+        .feedback-container {
+            position: relative;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 50px 40px;
+            border-radius: 30px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 90%;
+            backdrop-filter: blur(10px);
+        }
+
+        .feedback-container h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: #d946ef;
+            margin-bottom: 10px;
+        }
+
+        .feedback-container .subtitle-small {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            font-size: 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 15px;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #d946ef;
+            box-shadow: 0 0 0 3px rgba(217, 70, 239, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(245, 87, 108, 0.3);
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(245, 87, 108, 0.5);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* ========== PAGE 4: Thank You ========== */
+        .thankyou-container {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            color: white;
+            max-width: 700px;
+            width: 90%;
+        }
+
+        .thankyou-container h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(3rem, 8vw, 5rem);
+            color: #fbbf24;
+            margin-bottom: 30px;
+            text-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
+        }
+
+        .thankyou-container p {
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .call-instruction {
+            margin-top: 40px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .phone-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #fbbf24;
+            margin: 20px 0;
+            letter-spacing: 2px;
+        }
+
+        .call-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 18px 40px;
+            font-size: 1.4rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .call-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(16, 185, 129, 0.6);
+        }
+
+        /* Music controls */
+        .music-controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+
+        .music-btn {
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .music-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .music-btn.playing {
+            animation: music-pulse 1s infinite;
+        }
+
+        @keyframes music-pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        /* Loading spinner */
+        .spinner {
+            display: none;
+            margin-left: 10px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .submit-btn.loading .spinner {
+            display: inline-block;
+        }
+
+        @media (max-width: 600px) {
+            .proposal-container,
+            .feedback-container {
+                padding: 40px 25px;
+            }
+
+            .buttons-container {
+                flex-direction: column;
+            }
+
+            #noBtn {
+                position: relative !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hearts container -->
+    <div class="hearts-container" id="heartsContainer"></div>
+
+    <!-- PAGE 1: Proposal Question -->
+    <div class="page active" id="page1">
+        <div class="proposal-container">
+            <div class="ring-icon">💍</div>
+            <h1>Will You Marry Me?</h1>
+            <p class="subtitle">You are my everything, my forever, my always. I can't imagine my life without you. Let's make this official! ❤️</p>
+            
+            <div class="buttons-container">
+                <button class="btn" id="yesBtn" onclick="handleYes()">Yes! 💕</button>
+                <button class="btn" id="noBtn" onmouseover="moveButton()" onclick="moveButton()">No</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 2: Celebration with Song -->
+    <div class="page" id="page2">
+        <div class="celebration-container">
+            <h2>YESSS!!! 🎉💍</h2>
+            <p>You've made me the happiest person alive!</p>
+            <p>This is the beginning of our forever! ❤️</p>
+            <span class="emoji-big">💑 👰 🤵 💕 💐 🎊</span>
+            <button class="continue-btn" onclick="goToFeedback()">Continue to Share Your Thoughts 💌</button>
+        </div>
+    </div>
+
+    <!-- PAGE 3: Feedback Form -->
+    <div class="page" id="page3">
+        <div class="feedback-container">
+            <h2>Share Your Feelings! 💝</h2>
+            <p class="subtitle-small">I'd love to know what you're thinking right now...</p>
+            
+            <form id="feedbackForm" onsubmit="submitFeedback(event)">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" required placeholder="Enter your beautiful name...">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Your Email</label>
+                    <input type="email" id="email" name="email" required placeholder="your@email.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Your Phone Number</label>
+                    <input type="tel" id="phone" name="phone" required placeholder="+91 XXXXX XXXXX">
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Your Thoughts & Feelings ❤️</label>
+                    <textarea id="message" name="message" required placeholder="Tell me everything you're feeling right now..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    Send My Heart 💕
+                    <span class="spinner"></span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- PAGE 4: Thank You & Call -->
+    <div class="page" id="page4">
+        <div class="thankyou-container">
+            <h2>Thank You! 💖</h2>
+            <p>Your message has been sent successfully!</p>
+            <p>I can't wait to talk to you about this special moment!</p>
+            
+            <div class="call-instruction">
+                <p style="font-size: 1.5rem; margin-bottom: 15px;">📞 Let's Connect!</p>
+                <p>Click the button below to call me right now:</p>
+                <div class="phone-number">+91 XXXXX XXXXX</div>
+                <a href="tel:+91XXXXXXXXXX" class="call-btn">📞 Call Me Now!</a>
+            </div>
+
+            <span class="emoji-big" style="margin-top: 40px;">💑 Forever Together 💕</span>
+        </div>
+    </div>
+
+    <!-- Music controls -->
+    <div class="music-controls">
+        <button class="music-btn" id="musicBtn" onclick="toggleMusic()">🎵</button>
+    </div>
+
+    <!-- Audio element -->
+    <audio id="bgMusic" loop>
+        <source src="https://cdn.pixabay.com/download/audio/2022/03/10/audio_4a8c83c69f.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // ========== Music Control ==========
+        const bgMusic = document.getElementById('bgMusic');
+        const musicBtn = document.getElementById('musicBtn');
+        let musicPlaying = false;
+
+        document.body.addEventListener('click', function() {
+            if (!musicPlaying) {
+                bgMusic.play().catch(e => console.log('Audio autoplay blocked'));
+                musicPlaying = true;
+                musicBtn.classList.add('playing');
+            }
+        }, { once: true });
+
+        function toggleMusic() {
+            if (musicPlaying) {
+                bgMusic.pause();
+                musicBtn.textContent = '🔇';
+                musicBtn.classList.remove('playing');
+                musicPlaying = false;
+            } else {
+                bgMusic.play();
+                musicBtn.textContent = '🎵';
+                musicBtn.classList.add('playing');
+                musicPlaying = true;
+            }
+        }
+
+        // ========== Floating Hearts ==========
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = Math.random() > 0.5 ? '❤️' : '💕';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            heart.style.animationDelay = Math.random() * 2 + 's';
+            heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
+            document.getElementById('heartsContainer').appendChild(heart);
+
+            setTimeout(() => heart.remove(), 7000);
+        }
+
+        setInterval(createHeart, 500);
+        for (let i = 0; i < 15; i++) {
+            setTimeout(createHeart, i * 200);
+        }
+
+        // ========== Page Navigation ==========
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+        }
+
+        // ========== Page 1: Proposal Logic ==========
+        let noClickCount = 0;
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+
+        function moveButton() {
+            noClickCount++;
+            
+            const currentSize = 1 + (noClickCount * 0.2);
+            yesBtn.style.transform = `scale(${currentSize})`;
+            
+            const container = document.querySelector('.buttons-container');
+            const containerRect = container.getBoundingClientRect();
+            const maxX = containerRect.width - noBtn.offsetWidth - 40;
+            const maxY = containerRect.height - noBtn.offsetHeight - 40;
+            const randomX = Math.random() * maxX - (maxX / 2);
+            const randomY = Math.random() * maxY - (maxY / 2);
+            
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+
+            const noTexts = ['No', 'Are you sure?', 'Really?', 'Think again!', 'Please? 🥺', 'Come on!', 'Pretty please?', 'Last chance!'];
+            noBtn.textContent = noTexts[Math.min(noClickCount, noTexts.length - 1)];
+
+            if (noClickCount > 5) {
+                noBtn.style.transform = 'scale(0.6)';
+                noBtn.style.opacity = '0.5';
+            }
+
+            if (noClickCount > 8) {
+                noBtn.style.display = 'none';
+            }
+        }
+
+        function handleYes() {
+            // Heart explosion
+            for (let i = 0; i < 30; i++) {
+                setTimeout(createHeart, i * 50);
+            }
+            
+            // Go to celebration page and change music tempo
+            setTimeout(() => {
+                showPage('page2');
+                bgMusic.playbackRate = 1.2;
+            }, 500);
+        }
+
+        // ========== Page 2: Continue to Feedback ==========
+        function goToFeedback() {
+            showPage('page3');
+        }
+
+        // ========== Page 3: Submit Feedback ==========
+        function submitFeedback(event) {
+            event.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const formData = new FormData(event.target);
+            const data = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                message: formData.get('message'),
+                timestamp: new Date().toLocaleString()
+            };
+
+            // Disable button and show loading
+            submitBtn.disabled = true;
+            submitBtn.classList.add('loading');
+            submitBtn.textContent = 'Sending... ';
+
+            // Send email using FormSubmit (free service, no API key needed)
+            fetch('https://formsubmit.co/dineshkumarg1840@gmail.com', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: data.name,
+                    email: data.email,
+                    phone: data.phone,
+                    message: data.message,
+                    _subject: '💍 New Marriage Proposal Response!',
+                    _template: 'box',
+                    _captcha: 'false'
+                })
+            })
+            .then(response => {
+                console.log('Form submitted successfully');
+                // Go to thank you page
+                showPage('page4');
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('loading');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Still go to thank you page even if email fails
+                showPage('page4');
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('loading');
+            });
+        }
+    </script>
+</body>
+</html>
